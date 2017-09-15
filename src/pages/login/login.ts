@@ -9,20 +9,23 @@ import { HomePage } from '../home/home'
   templateUrl: 'login.html'
 })
 export class LoginPage {
+  username = "anonymous"
+  seed = ""
 
   constructor(public navCtrl: NavController, private storage: Storage) {
     this.init();
   }
 
   init(){
-    this.storage.get('username').then((val) => {
-      console.log('Your age is', val);
-      document.getElementById('username').setAttribute('value', val)
+    this.storage.ready().then(() => {
+      this.username = localStorage.getItem('username');
+      this.seed = localStorage.getItem('seed');
     });
   }
 
   login(){
-    this.storage.set('username', document.getElementById('username').getAttribute('value'));
+    localStorage.setItem('username', this.username);
+    localStorage.setItem('seed', this.seed);
     this.navCtrl.push(HomePage);
   }
 

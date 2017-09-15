@@ -10,12 +10,12 @@
 
     <ion-item>
       <ion-label fixed>Nickname</ion-label>
-      <ion-input type="text" value="anonymous" id="username"></ion-input>
+      <ion-input type="text" value="anonymous" [(ngModel)]="username"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label fixed>Seed</ion-label>
-      <ion-input type="text" id="seed"></ion-input>
+      <ion-input type="text"  [(ngModel)]="seed">></ion-input>
     </ion-item>
 
   </ion-list>
