@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>Welcome to io_messenger</h2>
+  <ion-list>
+
+    <ion-item>
+      <ion-label fixed>Nickname</ion-label>
+      <ion-input type="text" value="anonymous" id="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label fixed>Seed</ion-label>
+      <ion-input type="text" id="seed"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <div padding>
+    <button ion-button color="secondary" (click)="login()">Sign In</button>
+  </div>
+</ion-content>
