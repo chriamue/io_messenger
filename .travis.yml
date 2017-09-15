@@ -62,8 +62,7 @@ env:
   - JAVA_HOME=/usr/lib/jvm/java-8-oracle
 deploy:
   provider: releases
-  api_key:
-    secure: .
+  api_key: "$GH_TOKEN"
   file_glob: true
   file: output/*
   skip_cleanup: true
