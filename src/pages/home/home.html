@@ -27,4 +27,12 @@
       </button>
     </ion-item>
   </ion-list>
+
+  <ion-list no-lines>
+    <ion-item *ngFor="let transaction of transferList">
+      <ion-icon name="text" item-start></ion-icon>
+      {{ transaction.name }}
+      <ion-badge item-end>{{ transaction.message }}</ion-badge>
+    </ion-item>
+  </ion-list>
 </ion-content>
