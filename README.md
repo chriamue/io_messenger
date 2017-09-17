@@ -2,6 +2,10 @@
 
 IOTA based messenger
 
+master branch: [![Build Status](https://travis-ci.org/chriamue/io_messenger.svg?branch=master)](https://travis-ci.org/chriamue/io_messenger)
+
+develop branch: [![Build Status](https://travis-ci.org/chriamue/io_messenger.svg?branch=develop)](https://travis-ci.org/chriamue/io_messenger)
+
 ## With the Ionic CLI:
 
 ```bash
