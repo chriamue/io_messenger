@@ -3,14 +3,16 @@ import {TabNavigator, StackNavigator} from 'react-navigation';
 
 import CounterViewContainer from '../counter/CounterViewContainer';
 import ColorViewContainer from '../colors/ColorViewContainer';
+import ChatViewContainer from '../chat/ChatViewContainer';
 
 const headerColor = '#39babd';
 const activeColor = 'white';
 
 // TabNavigator is nested inside StackNavigator
 export const MainScreenNavigator = TabNavigator({
-  Counter: {screen: CounterViewContainer},
-  Color: {screen: ColorViewContainer}
+  Chat: {screen: ChatViewContainer},
+  Counter: {screen: CounterViewContainer}
+  //Color: {screen: ColorViewContainer}
 }, {
   tabBarOptions: {
     ...Platform.select({
@@ -24,7 +26,7 @@ export const MainScreenNavigator = TabNavigator({
 });
 
 MainScreenNavigator.navigationOptions = {
-  title: 'Pepperoni App Template',
+  title: 'io Messenger',
   headerTitleStyle: {color: 'white'},
   headerStyle: {
     backgroundColor: headerColor,

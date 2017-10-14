@@ -55,7 +55,10 @@
     "redux-loop-symbol-ponyfill": "^2.2.0",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.0.1",
-    "standard-http-error": "^2.0.0"
+    "standard-http-error": "^2.0.0",
+    "react-native-gifted-chat": "^0.2.7",
+    "react-native-maps": "^0.16.4",
+    "react-native-nav": "cribspot/react-native-nav#76baa81ded23829ad9b5eb4e4a51052b20fb4e08"
   },
   "devDependencies": {
     "babel-core": "^6.9.0",
