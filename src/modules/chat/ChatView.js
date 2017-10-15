@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Button,
   View,
+  Text,
   StyleSheet
 } from 'react-native';
 
@@ -20,16 +21,17 @@ class ChatView extends Component {
   static navigationOptions = {
     title: 'Chat!',
     tabBarIcon: (props) => (
-        <Icon name='color-lens' size={24} color={props.tintColor} />
-      ),
-    // TODO: move this into global config?
-    headerTintColor: 'white',
-    headerStyle: {
-      backgroundColor: '#39babd'
-    }
+      <Icon name='plus-one' size={24} color={props.tintColor} />
+    )
   }
 
   static propTypes = {
+    seed: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    recipient: PropTypes.string.isRequired,
+    chatStateActions: PropTypes.shape({
+      genAddress: PropTypes.func.isRequired      
+    }).isRequired,
     navigate: PropTypes.func.isRequired
   };
 
@@ -37,9 +39,9 @@ class ChatView extends Component {
     messages: [],
   };
 
-  constructor(props) {
-    super(props);
-  }
+  genAddress = () => {
+    this.props.chatStateActions.genAddress();
+  };
 
   componentWillMount() {
     this.setState({
@@ -67,6 +69,9 @@ class ChatView extends Component {
   render() {
     return (
       <View style={[styles.container]}>
+      <Text style={styles.linkButton}>
+          Welcome, {this.props.seed}!
+        </Text>
        <GiftedChat
         messages={this.state.messages}
         onSend={(messages) => this.onSend(messages)}
@@ -82,6 +87,12 @@ class ChatView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  linkButton: {
+    textAlign: 'center',
+    color: '#CCCCCC',
+    marginBottom: 10,
+    padding: 5
   }
 });
 

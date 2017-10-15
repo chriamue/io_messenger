@@ -4,6 +4,7 @@ import {TabNavigator, StackNavigator} from 'react-navigation';
 import CounterViewContainer from '../counter/CounterViewContainer';
 import ColorViewContainer from '../colors/ColorViewContainer';
 import ChatViewContainer from '../chat/ChatViewContainer';
+import SettingsViewContainer from '../settings/SettingsViewContainer';
 
 const headerColor = '#39babd';
 const activeColor = 'white';
@@ -11,7 +12,8 @@ const activeColor = 'white';
 // TabNavigator is nested inside StackNavigator
 export const MainScreenNavigator = TabNavigator({
   Chat: {screen: ChatViewContainer},
-  Counter: {screen: CounterViewContainer}
+  Counter: {screen: CounterViewContainer},
+  Settings: {screen: SettingsViewContainer}
   //Color: {screen: ColorViewContainer}
 }, {
   tabBarOptions: {
