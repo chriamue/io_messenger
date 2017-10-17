@@ -1,6 +1,7 @@
 import {Platform} from 'react-native';
 import {TabNavigator, StackNavigator} from 'react-navigation';
 
+import ContactsViewContainer from '../contacts/ContactsViewContainer';
 import CounterViewContainer from '../counter/CounterViewContainer';
 import ColorViewContainer from '../colors/ColorViewContainer';
 import ChatViewContainer from '../chat/ChatViewContainer';
@@ -12,6 +13,7 @@ const activeColor = 'white';
 // TabNavigator is nested inside StackNavigator
 export const MainScreenNavigator = TabNavigator({
   Chat: {screen: ChatViewContainer},
+  Contacts: {screen: ContactsViewContainer},
   Counter: {screen: CounterViewContainer},
   Settings: {screen: SettingsViewContainer}
   //Color: {screen: ColorViewContainer}
@@ -39,7 +41,8 @@ MainScreenNavigator.navigationOptions = {
 // Root navigator is a StackNavigator
 const AppNavigator = StackNavigator({
   Home: {screen: MainScreenNavigator},
-  InfiniteColorStack: {screen: ColorViewContainer}
+  InfiniteColorStack: {screen: ColorViewContainer},
+  InfiniteChatStack: {screen: ChatViewContainer}
 });
 
 export default AppNavigator;

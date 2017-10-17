@@ -4,6 +4,7 @@ import NavigatorStateReducer from '../modules/navigator/NavigatorState';
 import CounterStateReducer from '../modules/counter/CounterState';
 import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState';
 // ## Generator Reducer Imports
+import ContactsReducer from '../modules/contacts/ContactsState';
 import SettingsReducer from '../modules/settings/SettingsState';
 import ChatReducer from '../modules/chat/ChatState';
 
@@ -11,6 +12,7 @@ const reducers = {
   // Counter sample app state. This can be removed in a live application
   counter: CounterStateReducer,
   // ## Generator Reducers
+  contacts: ContactsReducer,
   settings: SettingsReducer,
   chat: ChatReducer,
 
