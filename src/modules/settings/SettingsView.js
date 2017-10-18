@@ -1,10 +1,14 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
-  StyleSheet,
   Text,
+  TextInput,
+  ScrollView,
   View
 } from 'react-native';
+import {Card} from 'react-native-elements';
+import VersionNumber from 'react-native-version-number';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class SettingsView extends Component {
   static displayName = 'SettingsView';
@@ -15,27 +19,37 @@ class SettingsView extends Component {
   }
 
   static propTypes = {
+    seed: PropTypes.string.isRequired,
+    settingsStateActions: PropTypes.shape({
+      setSeed: PropTypes.func.isRequired
+    }).isRequired,
     navigate: PropTypes.func.isRequired
   };
 
-  render() {
+  buildSeed = () => {
     return (
-      <View style={styles.container}>
-        <Text style={styles.linkButton}>
-          Settings!
-        </Text>
+      <View>
+      <Text>Seed</Text>
+      <TextInput onChangeText={(text) => this.props.settingsStateActions.setSeed({text})} value={this.props.seed}/>
       </View>
     );
   }
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white'
+  render() {
+    const seed = this.buildSeed();
+    return (
+      <ScrollView>
+      <View>
+        <Text size='sm'>{'App version: ' + VersionNumber.appVersion}</Text>
+      </View>
+      <View>
+        <Card title='IOTA'>
+         {seed}
+        </Card>
+      </View>
+    </ScrollView>
+    );
   }
-});
+}
 
 export default SettingsView;

@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button,
   View,
   Text,
   StyleSheet
 } from 'react-native';
 
-import { GiftedChat } from 'react-native-gifted-chat';
+import {GiftedChat} from 'react-native-gifted-chat';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -30,13 +29,13 @@ class ChatView extends Component {
     address: PropTypes.string.isRequired,
     recipient: PropTypes.string.isRequired,
     chatStateActions: PropTypes.shape({
-      genAddress: PropTypes.func.isRequired      
+      genAddress: PropTypes.func.isRequired
     }).isRequired,
     navigate: PropTypes.func.isRequired
   };
 
   state = {
-    messages: [],
+    messages: []
   };
 
   genAddress = () => {
@@ -53,16 +52,16 @@ class ChatView extends Component {
           user: {
             _id: 2,
             name: 'React Native',
-            avatar: 'https://facebook.github.io/react/img/logo_og.png',
-          },
-        },
-      ],
+            avatar: 'https://facebook.github.io/react/img/logo_og.png'
+          }
+        }
+      ]
     });
   }
 
   onSend(messages = []) {
     this.setState((previousState) => ({
-      messages: GiftedChat.append(previousState.messages, messages),
+      messages: GiftedChat.append(previousState.messages, messages)
     }));
   }
 
@@ -76,7 +75,7 @@ class ChatView extends Component {
         messages={this.state.messages}
         onSend={(messages) => this.onSend(messages)}
         user={{
-          _id: 1,
+          _id: 1
         }}
       />
       </View>
@@ -86,7 +85,7 @@ class ChatView extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   linkButton: {
     textAlign: 'center',
