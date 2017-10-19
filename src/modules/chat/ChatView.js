@@ -10,6 +10,8 @@ import {GiftedChat} from 'react-native-gifted-chat';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+const iota = require('../../services/iota.js');
+
 /**
  * Sample view to demonstrate StackNavigator
  * @TODO remove this module in a live application.
@@ -63,6 +65,7 @@ class ChatView extends Component {
     this.setState((previousState) => ({
       messages: GiftedChat.append(previousState.messages, messages)
     }));
+    iota.sendMessage(this.props.seed, this.props.address, this.props.recipient, messages[0].text);
   }
 
   render() {

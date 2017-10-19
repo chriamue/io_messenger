@@ -1,16 +1,12 @@
 import {Map} from 'immutable';
 
-/*const IOTA = require('iota.lib.js')
-var testnet = new IOTA({
-  'host': 'http://p103.iotaledger.net',
-  'port': 14700
-});*/
+var env = require('../../../env.js');
 
 // Initial state
 const initialState = Map({
-  seed: 'unknown',
-  address: '',
-  recipient: '',
+  seed: env.seed,
+  address: env.address_from,
+  recipient: env.address_to,
   loading: false
 });
 

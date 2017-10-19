@@ -30,9 +30,8 @@ class ContactsView extends Component {
     var me = this;
     Contacts.getAll((err, contacts) => {
       if (err && err.type === 'permissionDenied') {
-        console.log('permissionDenied',err);
+        console.log('contacts permissionDenied',err);
       } else {
-        console.log('contacts[0]:--- ',contacts);
         let allContacts = contacts;
         me.setState({allContacts});
         me.setState({
