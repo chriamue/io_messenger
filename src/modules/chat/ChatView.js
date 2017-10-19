@@ -10,8 +10,6 @@ import {GiftedChat} from 'react-native-gifted-chat';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const iota = require('../../services/iota.js');
-
 /**
  * Sample view to demonstrate StackNavigator
  * @TODO remove this module in a live application.
@@ -31,7 +29,8 @@ class ChatView extends Component {
     address: PropTypes.string.isRequired,
     recipient: PropTypes.string.isRequired,
     chatStateActions: PropTypes.shape({
-      genAddress: PropTypes.func.isRequired
+      sendMessage: PropTypes.func.isRequired,
+      receiveMessage: PropTypes.func.isRequired
     }).isRequired,
     navigate: PropTypes.func.isRequired
   };
@@ -40,11 +39,8 @@ class ChatView extends Component {
     messages: []
   };
 
-  genAddress = () => {
-    this.props.chatStateActions.genAddress();
-  };
-
   componentWillMount() {
+    this.props.chatStateActions.receiveMessage();
     this.setState({
       messages: [
         {
@@ -61,11 +57,15 @@ class ChatView extends Component {
     });
   }
 
+  sendMessage = (text) => {
+    this.props.chatStateActions.sendMessage(text);
+  };
+
   onSend(messages = []) {
     this.setState((previousState) => ({
       messages: GiftedChat.append(previousState.messages, messages)
     }));
-    iota.sendMessage(this.props.seed, this.props.address, this.props.recipient, messages[0].text);
+    this.sendMessage(messages[0].text);
   }
 
   render() {

@@ -1,10 +1,10 @@
 const env = require('../../env.js');
 const IOTA = require('iota.lib.js');
-var testnet = new IOTA({
+const testnet = new IOTA({
   'host': env.host,
   'port': env.port
 });
-var iota = testnet;
+const iota = testnet;
 
 export async function sendMessage(seed, from, to, message, name = 'anonymous') {
   console.log(seed, from, to, message, name);
@@ -46,4 +46,36 @@ export async function sendMessage(seed, from, to, message, name = 'anonymous') {
   } catch (e) {
     console.log(e);
   }
+}
+
+export function getMessages(seed, address) {
+  iota.api.getNewAddress(
+    seed,
+    {index: 0},
+    function(error, success) {
+      console.log(error);
+      console.log(success);
+    }
+  );
+  console.log(seed);
+  console.log(address);
+  iota.api.getTransfers(env.seed, {start: 0}, function(e, transfers) {
+    console.log(transfers);
+  });
+  var messages = [];
+  iota.api.getAccountData(seed, function (e, accountData) {
+    console.log(e);
+    console.log(accountData);
+    accountData.transfers.forEach(function (transfer) {
+      try {
+        var message = iota.utils.extractJson(transfer);
+        messages.push(message);
+        console.log('Extracted JSON from Transaction: ', message);
+      } catch (e2) {
+        console.log(e2);
+        console.log('Transaction did not contain any JSON Data');
+      }
+    });
+  });
+  return messages;
 }
