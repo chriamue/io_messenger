@@ -57,9 +57,14 @@ export function getMessages(seed, address) {
         reject(error);
       }
       bundles.forEach(function(bundle) {
+        var timestamp = bundle[0].timestamp;
+        if (timestamp < 1262304000000) {
+          timestamp *= 1000;
+        }
+        var time = new Date(timestamp);
         var message = JSON.parse(iota.utils.extractJson(bundle));
 
-        messages.push(message.message);
+        messages.push({time: time, message: message.message});
       });
       resolve(messages);
     });

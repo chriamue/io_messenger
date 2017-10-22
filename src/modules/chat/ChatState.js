@@ -41,8 +41,8 @@ export async function receivingMessage(seed, address) {
   messages.forEach((message) => {
     msgs.push({
       _id: msgs.length,
-      text: message,
-      createdAt: new Date(),
+      text: message.message,
+      createdAt: message.time,
       user: {
         _id: 2,
         name: 'React Native',
