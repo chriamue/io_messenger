@@ -9,6 +9,7 @@ export default connect(
     seed: state.getIn(['chat', 'seed']),
     address: state.getIn(['chat', 'address']),
     recipient: state.getIn(['chat', 'recipient']),
+    messages: state.getIn(['chat', 'messages']),
     loading: state.getIn(['chat', 'loading'])
   }),
    dispatch => {

@@ -49,33 +49,19 @@ export async function sendMessage(seed, from, to, message, name = 'anonymous') {
 }
 
 export function getMessages(seed, address) {
-  iota.api.getNewAddress(
-    seed,
-    {index: 0},
-    function(error, success) {
-      console.log(error);
-      console.log(success);
-    }
-  );
-  console.log(seed);
-  console.log(address);
-  iota.api.getTransfers(env.seed, {start: 0}, function(e, transfers) {
-    console.log(transfers);
-  });
+  var addresses = [address];
   var messages = [];
-  iota.api.getAccountData(seed, function (e, accountData) {
-    console.log(e);
-    console.log(accountData);
-    accountData.transfers.forEach(function (transfer) {
-      try {
-        var message = iota.utils.extractJson(transfer);
-        messages.push(message);
-        console.log('Extracted JSON from Transaction: ', message);
-      } catch (e2) {
-        console.log(e2);
-        console.log('Transaction did not contain any JSON Data');
+  return new Promise((resolve, reject) => {
+    iota.api._bundlesFromAddresses(addresses, true, (error, bundles) => {
+      if (error) {
+        reject(error);
       }
+      bundles.forEach(function(bundle) {
+        var message = JSON.parse(iota.utils.extractJson(bundle));
+
+        messages.push(message.message);
+      });
+      resolve(messages);
     });
-  });
-  return messages;
+  }).then(() => messages).catch((error) => { console.log(error); return []; });
 }

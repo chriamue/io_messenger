@@ -28,6 +28,8 @@ class ChatView extends Component {
     seed: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
     recipient: PropTypes.string.isRequired,
+    messages: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired,
     chatStateActions: PropTypes.shape({
       sendMessage: PropTypes.func.isRequired,
       receiveMessage: PropTypes.func.isRequired
@@ -69,13 +71,17 @@ class ChatView extends Component {
   }
 
   render() {
+    const loadingStyle = this.props.loading
+    ? {backgroundColor: '#eee'}
+    : null;
+    console.log('render', this.props.loading, this.props.messages);
     return (
       <View style={[styles.container]}>
-      <Text style={styles.linkButton}>
+      <Text style={[styles.linkButton, loadingStyle]}>
           Welcome, {this.props.seed}!
         </Text>
        <GiftedChat
-        messages={this.state.messages}
+        messages={this.props.messages}
         onSend={(messages) => this.onSend(messages)}
         user={{
           _id: 1

@@ -37,9 +37,21 @@ export async function sendingMessage(seed, address, recipient, text) {
 export async function receivingMessage(seed, address) {
   console.log(address);
   var messages = await iota.getMessages(seed, address);
-  console.log(messages);
-  return {type: SENDINGMESSAGE,
-    messages: messages};
+  var msgs = [];
+  messages.forEach((message) => {
+    msgs.push({
+      _id: msgs.length,
+      text: message,
+      createdAt: new Date(),
+      user: {
+        _id: 2,
+        name: 'React Native',
+        avatar: 'https://facebook.github.io/react/img/logo_og.png'
+      }
+    });
+  });
+  return {type: RECEIVINGMESSAGE,
+    messages: msgs};
 }
 
 // Reducer
@@ -56,10 +68,11 @@ export default function ChatStateReducer(state = initialState , action = {}) {
     case RECEIVEMESSAGE:
       return loop(
         state.set('loading', true),
-        Effects.promise(receivingMessage, env.seed2, state.get('recipient'))
+        Effects.promise(receivingMessage, state.get('seed'), state.get('recipient'))
       );
     case RECEIVINGMESSAGE:
       return state
+        .set('messages', action.messages)
         .set('loading', false);
     default:
       return state;
