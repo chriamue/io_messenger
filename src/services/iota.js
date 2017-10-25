@@ -56,7 +56,7 @@ export function getMessages(seed, address) {
       if (error) {
         reject(error);
       }
-      bundles.forEach(function(bundle) {
+      bundles.forEach((bundle) => {
         var timestamp = bundle[0].timestamp;
         if (timestamp < 1262304000000) {
           timestamp *= 1000;

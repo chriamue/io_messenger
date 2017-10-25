@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {TouchableOpacity, Text, ScrollView, View} from 'react-native';
-import {Icon} from 'react-native-elements';
-import {Card} from 'react-native-material-design';
+import {Icon, Card} from 'react-native-elements';
 
 const Contacts = require('react-native-contacts');
 
@@ -63,7 +62,6 @@ class ContactsView extends Component {
 					<View>
           { this.state.allContacts.map((contacts) => (
           <Card key={contacts.recordID} style={{backgroundColor: 'whitesmoke', padding: 10, margin: 1}}>
-            <Card.Body >
              <Text>
                 {contacts.givenName + ' ' + contacts.familyName}
               </Text>
@@ -72,7 +70,6 @@ class ContactsView extends Component {
                         {(contacts.phoneNumbers[0] ? (contacts.phoneNumbers[0].label === 'mobile' ? contacts.phoneNumbers[0].number : null) : '')}
 											</Text>
 						</TouchableOpacity>
-         </Card.Body>
          </Card>
  )) }
 	</View>

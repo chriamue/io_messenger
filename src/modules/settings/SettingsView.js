@@ -7,7 +7,6 @@ import {
   View
 } from 'react-native';
 import {Card} from 'react-native-elements';
-import VersionNumber from 'react-native-version-number';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class SettingsView extends Component {
@@ -26,11 +25,23 @@ class SettingsView extends Component {
     navigate: PropTypes.func.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.unsubscribe = null;
+    this.state = {
+      user: null,
+      message: '',
+      codeInput: '',
+      phoneNumber: '+44',
+      confirmResult: null
+    };
+  }
+
   buildSeed = () => {
     return (
       <View>
-      <Text>Seed</Text>
-      <TextInput onChangeText={(text) => this.props.settingsStateActions.setSeed({text})} value={this.props.seed}/>
+        <Text>Seed</Text>
+        <TextInput onChangeText={(text) => this.props.settingsStateActions.setSeed({text})} value={this.props.seed}/>
       </View>
     );
   }
@@ -40,7 +51,7 @@ class SettingsView extends Component {
     return (
       <ScrollView>
       <View>
-        <Text size='sm'>{'App version: ' + VersionNumber.appVersion}</Text>
+        <Text size='sm'>{'App version: '/* + VersionNumber.appVersion*/}</Text>
       </View>
       <View>
         <Card title='IOTA'>

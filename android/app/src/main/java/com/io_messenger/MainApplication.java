@@ -3,7 +3,6 @@ package com.io_messenger;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.apsl.versionnumber.RNVersionNumberPackage;
 import com.rt2zz.reactnativecontacts.ReactNativeContacts;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -27,7 +26,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
-            new RNVersionNumberPackage(),
             new ReactNativeContacts(),
             new MapsPackage(),
         new VectorIconsPackage()
