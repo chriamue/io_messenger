@@ -9,6 +9,8 @@ import {
 import {Card} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import PhoneInput from 'react-native-phone-input';
+
 class SettingsView extends Component {
   static displayName = 'SettingsView';
 
@@ -32,7 +34,7 @@ class SettingsView extends Component {
       user: null,
       message: '',
       codeInput: '',
-      phoneNumber: '+44',
+      phone: '+44',
       confirmResult: null
     };
   }
@@ -56,6 +58,9 @@ class SettingsView extends Component {
       <View>
         <Card title='IOTA'>
          {seed}
+        </Card>
+        <Card title='PhoneNr'>
+          <PhoneInput ref='phone'/>
         </Card>
       </View>
     </ScrollView>

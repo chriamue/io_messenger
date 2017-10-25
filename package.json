@@ -57,6 +57,7 @@
     "react-native-gifted-chat": "^0.2.9",
     "react-native-maps": "^0.17.1",
     "react-native-nav": "^2.0.2",
+    "react-native-phone-input": "^0.1.10",
     "react-native-vector-icons": "^4.0.0",
     "react-navigation": "^1.0.0-beta.9",
     "react-redux": "^5.0.6",
