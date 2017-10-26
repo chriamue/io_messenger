@@ -69,6 +69,7 @@
     "redux-thunk": "^2.0.1",
     "standard-http-error": "^2.0.0",
     "stream-browserify": "^2.0.1",
+    "superagent": "^3.8.0",
     "vm-browserify": "0.0.4",
     "xmlhttprequest": "^1.8.0"
   },

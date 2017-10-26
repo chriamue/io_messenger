@@ -42,7 +42,7 @@ class ChatView extends Component {
   };
 
   componentWillMount() {
-    this.props.chatStateActions.receiveMessage();
+    //this.props.chatStateActions.receiveMessage();
     this.setState({
       messages: [
         {
@@ -72,21 +72,21 @@ class ChatView extends Component {
 
   render() {
     const loadingStyle = this.props.loading
-    ? {backgroundColor: '#eee'}
-    : null;
+      ? {backgroundColor: '#eee'}
+      : null;
     console.log('render', this.props.loading, this.props.messages);
     return (
       <View style={[styles.container]}>
-      <Text style={[styles.linkButton, loadingStyle]}>
+        <Text style={[styles.linkButton, loadingStyle]}>
           Welcome, {this.props.seed}!
         </Text>
-       <GiftedChat
-        messages={this.state.messages}
-        onSend={(messages) => this.onSend(messages)}
-        user={{
-          _id: 1
-        }}
-      />
+        <GiftedChat
+          messages={this.state.messages}
+          onSend={(messages) => this.onSend(messages)}
+          user={{
+            _id: 1
+          }}
+        />
       </View>
     );
   }

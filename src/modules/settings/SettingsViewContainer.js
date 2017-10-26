@@ -7,6 +7,8 @@ import * as SettingsStateActions from '../settings/SettingsState';
 export default connect(
   state => ({
     seed: state.getIn(['settings', 'seed']),
+    address: state.getIn(['settings', 'address']),
+    phonenr: state.getIn(['settings', 'phonenr']),
     loading: state.getIn(['settings', 'loading'])
   }),
   dispatch => {
