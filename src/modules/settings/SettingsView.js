@@ -69,6 +69,11 @@ class SettingsView extends Component {
       });
   }
 
+  buildRecipient = () => {
+    const {params} = this.props.navigation.state;
+    var recipient = params.recipient;
+  }
+
   buildSeed = () => {
     return (
       <View>

@@ -8,7 +8,8 @@ const iota = require('../../services/iota.js');
 const initialState = Map({
   seed: env.seed,
   address: env.address_from,
-  recipient: env.address_to,
+  recipientName: 'unknown',
+  recipientAddress: env.address_to,
   messages: [],
   loading: false
 });

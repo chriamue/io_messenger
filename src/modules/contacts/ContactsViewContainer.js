@@ -6,10 +6,10 @@ import * as ContactsStateActions from '../contacts/ContactsState';
 
 export default connect(
   null,
-   dispatch => {
-     return {
-       navigate: bindActionCreators(NavigationActions.navigate, dispatch),
-       contactsStateActions: bindActionCreators(ContactsStateActions, dispatch)
-     };
-   }
+  dispatch => {
+    return {
+      navigate: bindActionCreators(NavigationActions.navigate, dispatch),
+      contactsStateActions: bindActionCreators(ContactsStateActions, dispatch)
+    };
+  }
 )(ContactsView);

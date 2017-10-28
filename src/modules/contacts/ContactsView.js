@@ -40,15 +40,15 @@ class ContactsView extends Component {
     });
   }
 
-  chat = () => {
-    this.props.navigate({routeName: 'InfiniteChatStack'});
+  chat = (recipientName, recipientAddress) => {
+    this.props.navigate({routeName: 'InfiniteChatStack', params: {recipientName: recipientName, recipientAddress: recipientAddress}});
   }
 
   renderLoadingView() {
     return (
-			<View style={{flex: 1}}>
+      <View style={{flex: 1}}>
         <Text>Fetching... </Text>
-			</View>
+      </View>
     );
   }
 
@@ -57,24 +57,24 @@ class ContactsView extends Component {
       return this.renderLoadingView();
     }
     return (
-			<View style={{flex: 1}}>
-				<ScrollView>
-					<View>
-          { this.state.allContacts.map((contacts) => (
-          <Card key={contacts.recordID} style={{backgroundColor: 'whitesmoke', padding: 10, margin: 1}}>
-             <Text>
-                {contacts.givenName + ' ' + contacts.familyName}
-              </Text>
-										<TouchableOpacity onPress={this.chat} accessible={true}>
-											<Text>
-                        {(contacts.phoneNumbers[0] ? (contacts.phoneNumbers[0].label === 'mobile' ? contacts.phoneNumbers[0].number : null) : '')}
-											</Text>
-						</TouchableOpacity>
-         </Card>
- )) }
-	</View>
-				</ScrollView>
-			</View>
+      <View style={{flex: 1}}>
+        <ScrollView>
+          <View>
+            { this.state.allContacts.map((contacts) => (
+              <Card key={contacts.recordID} style={{backgroundColor: 'whitesmoke', padding: 10, margin: 1}}>
+                <Text>
+                  {contacts.givenName + ' ' + contacts.familyName}
+                </Text>
+                <TouchableOpacity onPress={this.chat.bind(this, contacts.givenName, 'address')} accessible={true}>
+                  <Text>
+                    {(contacts.phoneNumbers[0] ? (contacts.phoneNumbers[0].label === 'mobile' ? contacts.phoneNumbers[0].number : null) : '')}
+                  </Text>
+                </TouchableOpacity>
+              </Card>
+            )) }
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 

@@ -17,21 +17,6 @@ class AppView extends Component {
     dispatch: PropTypes.func.isRequired
   };
 
-  navigateBack() {
-    const navigatorState = store.getState().get('navigatorState');
-
-    const currentStackScreen = navigatorState.get('index');
-    const currentTab = navigatorState.getIn(['routes', 0, 'index']);
-
-    if (currentTab !== 0 || currentStackScreen !== 0) {
-      store.dispatch(NavigationActions.back());
-      return true;
-    }
-
-    // otherwise let OS handle the back button action
-    return false;
-  }
-
   componentWillMount() {
     BackHandler.addEventListener('hardwareBackPress', this.navigateBack);
   }
@@ -51,6 +36,21 @@ class AppView extends Component {
           snapshotUtil.saveSnapshot(store.getState());
         });
       });
+  }
+
+  navigateBack() {
+    const navigatorState = store.getState().get('navigatorState');
+
+    const currentStackScreen = navigatorState.get('index');
+    const currentTab = navigatorState.getIn(['routes', 0, 'index']);
+
+    if (currentTab !== 0 || currentStackScreen !== 0) {
+      store.dispatch(NavigationActions.back());
+      return true;
+    }
+
+    // otherwise let OS handle the back button action
+    return false;
   }
 
   render() {

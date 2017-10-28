@@ -16,8 +16,8 @@ class CounterView extends Component {
   static navigationOptions = {
     title: 'Counter',
     tabBarIcon: (props) => (
-        <Icon name='plus-one' size={24} color={props.tintColor} />
-      )
+      <Icon name='plus-one' size={24} color={props.tintColor} />
+    )
   }
 
   static propTypes = {

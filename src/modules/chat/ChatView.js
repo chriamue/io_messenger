@@ -28,7 +28,8 @@ class ChatView extends Component {
   static propTypes = {
     seed: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
-    recipient: PropTypes.string.isRequired,
+    recipientAddress: PropTypes.string.isRequired,
+    recipientName: PropTypes.string.isRequired,
     messages: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired,
     chatStateActions: PropTypes.shape({
@@ -97,7 +98,7 @@ class ChatView extends Component {
     return (
       <View style={[styles.container]}>
         <Text style={[styles.linkButton, loadingStyle]}>
-          Welcome, {this.props.seed}!
+          Chat with {this.props.recipientName}!
         </Text>
         <GiftedChat
           messages={this.state.messages}

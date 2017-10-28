@@ -12,7 +12,7 @@ const activeColor = 'white';
 
 // TabNavigator is nested inside StackNavigator
 export const MainScreenNavigator = TabNavigator({
-  Chat: {screen: ChatViewContainer},
+  //Chat: {screen: ChatViewContainer},
   Contacts: {screen: ContactsViewContainer},
   Counter: {screen: CounterViewContainer},
   Settings: {screen: SettingsViewContainer}
