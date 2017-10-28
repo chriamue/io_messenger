@@ -9,6 +9,7 @@ import {
 import {GiftedChat} from 'react-native-gifted-chat';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+const iota = require('../../services/iota.js');
 
 /**
  * Sample view to demonstrate StackNavigator
@@ -42,7 +43,6 @@ class ChatView extends Component {
   };
 
   componentWillMount() {
-    //this.props.chatStateActions.receiveMessage();
     this.setState({
       messages: [
         {
@@ -57,6 +57,25 @@ class ChatView extends Component {
         }
       ]
     });
+    this.receiveMessages();
+  }
+
+  async receiveMessages() {
+    var messages = await iota.getMessages(this.props.seed, this.props.address);
+    var msgs = [];
+    messages.forEach((message) => {
+      console.log(message);
+      this.messages.push({
+        _id: msgs.length,
+        text: message.message,
+        createdAt: message.time,
+        user: {
+          _id: 2,
+          name: 'React Native',
+          avatar: 'https://facebook.github.io/react/img/logo_og.png'
+        }
+      });
+    });
   }
 
   sendMessage = (text) => {
@@ -67,7 +86,7 @@ class ChatView extends Component {
     this.setState((previousState) => ({
       messages: GiftedChat.append(previousState.messages, messages)
     }));
-    this.sendMessage(messages[0].text);
+    iota.sendMessage(this.props.seed, this.props.address, this.props.recipient, messages[0].text);
   }
 
   render() {

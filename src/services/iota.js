@@ -51,24 +51,27 @@ export async function sendMessage(seed, from, to, message, name = 'anonymous') {
 export function getMessages(seed, address) {
   var addresses = [address];
   var messages = [];
+  console.log(seed,' X ', address);
   return new Promise((resolve, reject) => {
     iota.api._bundlesFromAddresses(addresses, true, (error, bundles) => {
       if (error) {
         reject(error);
       }
-      bundles.forEach((bundle) => {
-        var timestamp = bundle[0].timestamp;
-        if (timestamp < 1262304000000) {
-          timestamp *= 1000;
-        }
-        var time = new Date(timestamp);
-        var message = JSON.parse(iota.utils.extractJson(bundle));
-
-        messages.push({time: time, message: message.message});
-      });
+      if (bundles) {
+        bundles.forEach((bundle) => {
+          var timestamp = bundle[0].timestamp;
+          if (timestamp < 1262304000000) {
+            timestamp *= 1000;
+          }
+          var time = new Date(timestamp);
+          var message = JSON.parse(iota.utils.extractJson(bundle));
+          console.log(message);
+          messages.push({time: time, message: message.message});
+        });
+      }
       resolve(messages);
     });
-  }).then(() => messages).catch((error) => { console.log(error); return []; });
+  }).then(() => messages).catch((error) => { console.warn(error); return []; });
 }
 
 export function generateAddress(seed, index) {
