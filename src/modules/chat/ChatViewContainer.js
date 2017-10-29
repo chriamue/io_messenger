@@ -11,8 +11,8 @@ const mapStateToProps = (state, ownProps) => {
   var recipientName = params.recipientName ? params.recipientName : '';
   var recipientAddress = params.recipientAddress ? params.recipientAddress : '';
   return {
-    seed: state.getIn(['chat', 'seed']),
-    address: state.getIn(['chat', 'address']),
+    seed: state.getIn(['settings', 'seed']),
+    address: state.getIn(['settings', 'address']),
     loading: state.getIn(['chat', 'loading']),
     recipientAddress: recipientAddress,
     recipientName: recipientName

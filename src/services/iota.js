@@ -95,7 +95,7 @@ export function fillSeed(seed) {
   if (!seed) {
     seed = '';
   }
-  var filledseed = seed.toUpperCase();
+  var filledseed = '';
   for (var i = 0; i < seed.length; ++i) {
     if (('ABCDEFGHIJKLMNOPQRSTUVWXYZ9').indexOf(seed.charAt(i)) < 0) {
       filledseed += '9';

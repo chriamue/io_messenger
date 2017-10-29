@@ -6,8 +6,6 @@ const iota = require('../../services/iota.js');
 
 // Initial state
 const initialState = Map({
-  seed: env.seed,
-  address: env.address_from,
   recipientName: 'unknown',
   recipientAddress: env.address_to,
   loading: false

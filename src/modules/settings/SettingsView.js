@@ -40,6 +40,8 @@ class SettingsView extends Component {
     this.unsubscribe = null;
     this.state = {
       user: null,
+      seed: this.props.seed,
+      address: this.props.address,
       message: '',
       codeInput: '',
       phone: '+44',
@@ -73,7 +75,10 @@ class SettingsView extends Component {
     return (
       <View>
         <FormLabel>Seed</FormLabel>
-        <FormInput onChangeText={this.setSeed} value={this.props.seed}/>
+        <FormInput ref='seedInput' onChangeText={(text) => this.setState({seed: text})} value={this.state.seed}
+          onSubmitEditing={(event) => {
+            this.setSeed(this.state.seed);
+          }}/>
       </View>
     );
   }
@@ -82,7 +87,6 @@ class SettingsView extends Component {
     return (
       <View>
         <Button
-          raised
           icon={{name: 'cached'}}
           title='Generate Address' onPress={() => this.generateAddress() }/>
         <TextInput onChangeText={(text) => this.props.settingsStateActions.setAddress({text})} value={this.props.address}/>
