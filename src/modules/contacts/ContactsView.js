@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {TouchableOpacity, Text, ScrollView, View} from 'react-native';
+import {Alert, TouchableOpacity, Text, ScrollView, View} from 'react-native';
 import {Icon, Card} from 'react-native-elements';
 
 const Contacts = require('react-native-contacts');
+const request = require('superagent');
+
+const env = require('../../../env.js');
 
 class ContactsView extends Component {
   static displayName = 'ContactsView';
@@ -31,7 +34,12 @@ class ContactsView extends Component {
       if (err && err.type === 'permissionDenied') {
         console.log('contacts permissionDenied',err);
       } else {
-        let allContacts = contacts;
+        let allContacts = [];
+        contacts.forEach((contact) => {
+          if (contact.phoneNumbers[0]) {
+            allContacts.push(contact);
+          }
+        });
         me.setState({allContacts});
         me.setState({
           loaded: true
@@ -40,8 +48,18 @@ class ContactsView extends Component {
     });
   }
 
-  chat = (recipientName, recipientAddress) => {
-    this.props.navigate({routeName: 'InfiniteChatStack', params: {recipientName: recipientName, recipientAddress: recipientAddress}});
+  chat = (recipientName, recipientNumber) => {
+    var url = env.dictionary_url + '/address/' + recipientNumber.replace(/\s/g, '');
+    request.get(url).set('accept', 'json')
+      .end((err, res) => {
+        console.log(err);
+        console.log(res);
+        if (res && res.status === 200) {
+          this.props.navigate({routeName: 'InfiniteChatStack', params: {recipientName: recipientName, recipientAddress: res.body.address}});
+        } else {
+          Alert.alert('Error getting address', recipientName + ' has no address');
+        }
+      });
   }
 
   renderLoadingView() {
@@ -65,7 +83,7 @@ class ContactsView extends Component {
                 <Text>
                   {contacts.givenName + ' ' + contacts.familyName}
                 </Text>
-                <TouchableOpacity onPress={this.chat.bind(this, contacts.givenName, 'address')} accessible={true}>
+                <TouchableOpacity onPress={this.chat.bind(this, contacts.givenName, contacts.phoneNumbers[0].number)} accessible={true}>
                   <Text>
                     {(contacts.phoneNumbers[0] ? (contacts.phoneNumbers[0].label === 'mobile' ? contacts.phoneNumbers[0].number : null) : '')}
                   </Text>

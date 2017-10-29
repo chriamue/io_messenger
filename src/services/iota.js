@@ -1,5 +1,5 @@
 const env = require('../../env.js');
-const IOTA = require('iota.lib.js');
+const IOTA = require('iota.lib.js'); // "iota.lib.js": "Roconda/iota.lib.js#react_native",
 const testnet = new IOTA({
   'host': env.host,
   'port': env.port
@@ -57,6 +57,7 @@ export function getMessages(seed, address) {
       if (error) {
         reject(error);
       }
+      console.log(bundles);
       if (bundles) {
         bundles.forEach((bundle) => {
           var timestamp = bundle[0].timestamp;

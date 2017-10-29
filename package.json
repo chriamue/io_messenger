@@ -42,7 +42,7 @@
     "bluebird": "^3.3.5",
     "event-emitter": "^0.3.4",
     "immutable": "^3.7.6",
-    "iota.lib.js": "Roconda/iota.lib.js#react_native",
+    "iota.lib.js": "l3wi/iota.lib.js",
     "lodash": "^4.11.0",
     "moment": "^2.12.0",
     "native-base": "^2.3.3",

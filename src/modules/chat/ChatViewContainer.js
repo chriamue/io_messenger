@@ -7,13 +7,12 @@ import * as ChatStateActions from '../chat/ChatState';
 const mapStateToProps = (state, ownProps) => {
   console.log('OWNPROPS', ownProps);
   //const recipient = ownProps.navigation.state.params.recipient;
-  var params = ownProps.navigation.state.params | {recipientAddress: '', recipientName: ''};
-  var recipientName = params.recipientName | '';
-  var recipientAddress = params.recipientAddress | '';
+  var params = ownProps.navigation.state.params ? ownProps.navigation.state.params : {recipientAddress: '', recipientName: ''};
+  var recipientName = params.recipientName ? params.recipientName : '';
+  var recipientAddress = params.recipientAddress ? params.recipientAddress : '';
   return {
     seed: state.getIn(['chat', 'seed']),
     address: state.getIn(['chat', 'address']),
-    messages: state.getIn(['chat', 'messages']),
     loading: state.getIn(['chat', 'loading']),
     recipientAddress: recipientAddress,
     recipientName: recipientName

@@ -10,6 +10,7 @@ import {GiftedChat} from 'react-native-gifted-chat';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 const iota = require('../../services/iota.js');
+const env = require('../../../env.js');
 
 /**
  * Sample view to demonstrate StackNavigator
@@ -30,11 +31,9 @@ class ChatView extends Component {
     address: PropTypes.string.isRequired,
     recipientAddress: PropTypes.string.isRequired,
     recipientName: PropTypes.string.isRequired,
-    messages: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired,
     chatStateActions: PropTypes.shape({
-      sendMessage: PropTypes.func.isRequired,
-      receiveMessage: PropTypes.func.isRequired
+      sendMessage: PropTypes.func.isRequired
     }).isRequired,
     navigate: PropTypes.func.isRequired
   };
@@ -44,6 +43,7 @@ class ChatView extends Component {
   };
 
   componentWillMount() {
+    console.log('CHAT COMPONENT WILL MOUNT');
     this.setState({
       messages: [
         {
@@ -62,12 +62,13 @@ class ChatView extends Component {
   }
 
   async receiveMessages() {
-    var messages = await iota.getMessages(this.props.seed, this.props.address);
     var msgs = [];
+    // get sent messages
+    var messages = await iota.getMessages(this.props.seed, this.props.address);
     messages.forEach((message) => {
       console.log(message);
-      this.messages.push({
-        _id: msgs.length,
+      msgs.push({
+        _id: msgs.length + this.state.messages.length + 1,
         text: message.message,
         createdAt: message.time,
         user: {
@@ -77,6 +78,24 @@ class ChatView extends Component {
         }
       });
     });
+    // get received messages
+    messages = await iota.getMessages(this.props.seed, this.props.recipientAddress);
+    messages.forEach((message) => {
+      console.log(message);
+      msgs.push({
+        _id: msgs.length + this.state.messages.length + 1,
+        text: message.message,
+        createdAt: message.time,
+        user: {
+          _id: 1,
+          name: 'React Native',
+          avatar: 'https://facebook.github.io/react/img/logo_og.png'
+        }
+      });
+    });
+    this.setState((previousState) => ({
+      messages: GiftedChat.append(previousState.messages, msgs)
+    }));
   }
 
   sendMessage = (text) => {
@@ -87,14 +106,15 @@ class ChatView extends Component {
     this.setState((previousState) => ({
       messages: GiftedChat.append(previousState.messages, messages)
     }));
-    iota.sendMessage(this.props.seed, this.props.address, this.props.recipient, messages[0].text);
+    iota.sendMessage(this.props.seed, this.props.address, this.props.recipientAddress, messages[0].text);
+    // iota.sendMessage(env.seed2, this.props.recipientAddress, env.address_from, messages[0].text);
   }
 
   render() {
     const loadingStyle = this.props.loading
       ? {backgroundColor: '#eee'}
       : null;
-    console.log('render', this.props.loading, this.props.messages);
+    console.log('render', this.props.loading, this.state.messages);
     return (
       <View style={[styles.container]}>
         <Text style={[styles.linkButton, loadingStyle]}>
